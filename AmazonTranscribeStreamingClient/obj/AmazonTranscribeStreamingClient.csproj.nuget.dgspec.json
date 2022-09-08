@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/ubuntu/transcribe-dotnet-sdk/AmazonTranscribeStreamingClient/AmazonTranscribeStreamingClient.csproj": {}
+  },
+  "projects": {
+    "/home/ubuntu/transcribe-dotnet-sdk/AmazonTranscribeStreamingClient/AmazonTranscribeStreamingClient.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ubuntu/transcribe-dotnet-sdk/AmazonTranscribeStreamingClient/AmazonTranscribeStreamingClient.csproj",
+        "projectName": "AmazonTranscribeStreamingClient",
+        "projectPath": "/home/ubuntu/transcribe-dotnet-sdk/AmazonTranscribeStreamingClient/AmazonTranscribeStreamingClient.csproj",
+        "packagesPath": "/home/ubuntu/.nuget/packages/",
+        "outputPath": "/home/ubuntu/transcribe-dotnet-sdk/AmazonTranscribeStreamingClient/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ubuntu/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AWSSDK.Core": {
+              "target": "Package",
+              "version": "[3.7.12.18, )"
+            },
+            "Websocket.Client": {
+              "target": "Package",
+              "version": "[4.4.43, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.302/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

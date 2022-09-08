@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "xrnmJsIs1Qum2qaKlIJQrSwCv6L2CkUPosQhjzHBKP3BK35mdCJdZpgTtFVQZ8f54wIzNnE+9GdVEYcpepACeg==",
+  "success": true,
+  "projectFilePath": "/home/ubuntu/transcribe-dotnet-sdk/AmazonTranscribeStreamingClient/AmazonTranscribeStreamingClient.csproj",
+  "expectedPackageFiles": [
+    "/home/ubuntu/.nuget/packages/awssdk.core/3.7.12.18/awssdk.core.3.7.12.18.nupkg.sha512",
+    "/home/ubuntu/.nuget/packages/system.reactive/4.3.2/system.reactive.4.3.2.nupkg.sha512",
+    "/home/ubuntu/.nuget/packages/system.threading.channels/4.7.0/system.threading.channels.4.7.0.nupkg.sha512",
+    "/home/ubuntu/.nuget/packages/websocket.client/4.4.43/websocket.client.4.4.43.nupkg.sha512"
+  ],
+  "logs": []
+}

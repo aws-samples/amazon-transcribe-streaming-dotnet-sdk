@@ -1,17 +1,13 @@
-## My Project
+# Amazon Transcribe Streaming .NET SDK
 
-TODO: Fill this README out!
+This repo contains the AmazonTranscribeStreamingClient, a .NET Core
+client library that works with Amazon Transcribe Streaming.
 
-Be sure to:
+The client allows for sending audio to Amazon Transcribe and receiving 
+real-time transcriptions back.
 
-* Change the title in this README
-* Edit your repository description on GitHub
+There are helper functions for streaming files in chunks and also sending
+byte arrays.
 
-## Security
-
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
-
-## License
-
-This project is licensed under the Apache-2.0 License.
+For an example console application, see the Examples folder.
 
