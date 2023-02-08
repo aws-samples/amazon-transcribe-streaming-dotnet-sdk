@@ -3,7 +3,7 @@
 
 namespace Amazon.TranscribeStreamingService.Models {
     public class Config {
-        public string Language;
+        public string? Language;
         public string MediaEncoding;
         public string SampleRate;
         public string? VocabularyName { get; set; }
@@ -31,8 +31,8 @@ namespace Amazon.TranscribeStreamingService.Models {
             this.SampleRate = sampleRate;
         }
 
-        public Dictionary<string, string> GetDictionary() {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+        public SortedDictionary<string, string> GetDictionary() {
+            SortedDictionary<string, string> dict = new SortedDictionary<string, string>();
             dict.Add("language-code",this.Language);
             dict.Add("media-encoding",this.MediaEncoding);
             dict.Add("sample-rate",this.SampleRate);
