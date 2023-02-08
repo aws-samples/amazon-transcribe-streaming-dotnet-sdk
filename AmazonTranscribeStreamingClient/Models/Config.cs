@@ -25,7 +25,7 @@ namespace Amazon.TranscribeStreamingService.Models {
         public string? VocabularyNames { get; set; }
         public string? VocabularyFilterNames { get; set; }
 
-        public Config(string language, string mediaEncoding, string sampleRate) {
+        public Config(string mediaEncoding, string sampleRate, string? Language) {
             this.Language = language;
             this.MediaEncoding = mediaEncoding;
             this.SampleRate = sampleRate;
@@ -33,7 +33,7 @@ namespace Amazon.TranscribeStreamingService.Models {
 
         public SortedDictionary<string, string> GetDictionary() {
             SortedDictionary<string, string> dict = new SortedDictionary<string, string>();
-            dict.Add("language-code",this.Language);
+            if(!string.IsNullOrEmpty(this.Language)) dict.Add("language-code",this.Language);
             dict.Add("media-encoding",this.MediaEncoding);
             dict.Add("sample-rate",this.SampleRate);
             if(!string.IsNullOrEmpty(this.VocabularyName)) dict.Add("vocabulary-name", this.VocabularyName);
