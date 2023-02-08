@@ -25,8 +25,13 @@ namespace Amazon.TranscribeStreamingService.Models {
         public string? VocabularyNames { get; set; }
         public string? VocabularyFilterNames { get; set; }
 
-        public Config(string mediaEncoding, string sampleRate, string? Language) {
-            this.Language = language;
+        public Config(string mediaEncoding, string sampleRate) {
+            this.MediaEncoding = mediaEncoding;
+            this.SampleRate = sampleRate;
+        }
+
+        public Config(string mediaEncoding, string sampleRate, string language) {
+            this.Language = language
             this.MediaEncoding = mediaEncoding;
             this.SampleRate = sampleRate;
         }
