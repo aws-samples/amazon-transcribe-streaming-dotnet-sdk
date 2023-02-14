@@ -3,7 +3,7 @@
 
 namespace Amazon.TranscribeStreamingService.Models {
     public class Config {
-        public string Language;
+        public string? Language;
         public string MediaEncoding;
         public string SampleRate;
         public string? VocabularyName { get; set; }
@@ -25,15 +25,20 @@ namespace Amazon.TranscribeStreamingService.Models {
         public string? VocabularyNames { get; set; }
         public string? VocabularyFilterNames { get; set; }
 
-        public Config(string language, string mediaEncoding, string sampleRate) {
-            this.Language = language;
+        public Config(string mediaEncoding, string sampleRate) {
             this.MediaEncoding = mediaEncoding;
             this.SampleRate = sampleRate;
         }
 
-        public Dictionary<string, string> GetDictionary() {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict.Add("language-code",this.Language);
+        public Config(string mediaEncoding, string sampleRate, string language) {
+            this.Language = language
+            this.MediaEncoding = mediaEncoding;
+            this.SampleRate = sampleRate;
+        }
+
+        public SortedDictionary<string, string> GetDictionary() {
+            SortedDictionary<string, string> dict = new SortedDictionary<string, string>();
+            if(!string.IsNullOrEmpty(this.Language)) dict.Add("language-code",this.Language);
             dict.Add("media-encoding",this.MediaEncoding);
             dict.Add("sample-rate",this.SampleRate);
             if(!string.IsNullOrEmpty(this.VocabularyName)) dict.Add("vocabulary-name", this.VocabularyName);
