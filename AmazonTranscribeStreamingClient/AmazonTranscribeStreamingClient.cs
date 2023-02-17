@@ -144,7 +144,7 @@ namespace Amazon.TranscribeStreamingService
       {
         AudioEvent audioEvent = new AudioEvent(buffer);
         byte[] eventBuffer = audioEvent.Serialize();
-        _client.Send(buffer);
+        _client.Send(eventBuffer);
       }
       else
       {
