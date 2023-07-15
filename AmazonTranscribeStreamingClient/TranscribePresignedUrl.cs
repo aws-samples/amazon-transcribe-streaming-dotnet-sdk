@@ -62,7 +62,7 @@ namespace Amazon.TranscribeStreamingService {
                 {"X-Amz-Algorithm", "AWS4-HMAC-SHA256"},
                 {"X-Amz-Credential", credentials},
                 {"X-Amz-Date", dateTimeString},
-                {"X-Amz-Expires", "300"},
+                {"X-Amz-Expires", "30"},
                 {"X-Amz-Security-Token", securityToken},
                 {"X-Amz-SignedHeaders", "host"}
             };
