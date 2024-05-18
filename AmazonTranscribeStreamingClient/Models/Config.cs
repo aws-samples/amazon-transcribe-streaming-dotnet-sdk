@@ -36,6 +36,18 @@ namespace Amazon.TranscribeStreamingService.Models {
             this.SampleRate = sampleRate;
         }
 
+        public Config(string mediaEncoding, string sampleRate, string language, int numberofchannels)
+        {
+            this.Language = language;
+            this.MediaEncoding = mediaEncoding;
+            this.SampleRate = sampleRate;
+            this.NumberOfChannels = numberofchannels.ToString();
+            if (numberofchannels > 1)
+            {
+                this.EnableChannelIdentification = "TRUE";
+            }
+        }
+
         public SortedDictionary<string, string> GetDictionary() {
             SortedDictionary<string, string> dict = new SortedDictionary<string, string>();
             if(!string.IsNullOrEmpty(this.Language)) dict.Add("language-code",this.Language);
