@@ -56,15 +56,11 @@ namespace Amazon.TranscribeStreamingService
     {
       TranscribePresignedUrl presigned = new TranscribePresignedUrl(this._region, this._config, this._credentials);
       string webSocketUrl = presigned.GetPresignedUrl();
-      Debug.WriteLine(webSocketUrl);
       var url = new Uri(webSocketUrl);
-
       _client = new WebsocketClient(url);
-
       _client.ReconnectTimeout = TimeSpan.FromSeconds(30);
       _client.ReconnectionHappened.Subscribe(info =>
           Debug.WriteLine($"Reconnection happened, type: {info.Type}"));
-
       _client.DisconnectionHappened.Subscribe(info =>
           Debug.WriteLine($"Disconnect happened, type: {info.Type}"));
 

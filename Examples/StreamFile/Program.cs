@@ -32,21 +32,19 @@ namespace Amazon.TranscribeStreamingService.Example
 
         static async Task Main(string[] args)
         {
+          string? fileToStream = "Auto2_GUID_002_AGENT_SteveE_DT_2022-03-20T08-02-20-mono.wav";
 
-        //   string? fileToStream = "Auto2_GUID_002_AGENT_SteveE_DT_2022-03-20T08-02-20-mono.wav";
-          string? fileToStream = "Auto2_GUID_002_AGENT_SteveE_DT_2022-03-20T08-02-20.wav";
-
-
-          Config config = new Config("en-US", "pcm", "8000");
+          Config config = new Config("pcm", "8000", "en-US");
           //If the fileToStream is stereo, set the following parameters
-        //   config.EnableChannelIdentification = "true";
-        //   config.NumberOfChannels = "2";
+          // config.EnableChannelIdentification = "true";
+          // config.NumberOfChannels = "2";
 
           string? accessKey = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
           string? secretKey = Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY");
-          string? region = Environment.GetEnvironmentVariable("REGION");
+          string? sessionToken = Environment.GetEnvironmentVariable("AWS_SESSION_TOKEN");
+          string? region = Environment.GetEnvironmentVariable("AWS_DEFAULT_REGION");
           if (region == null) region = "us-east-1";
-          BasicAWSCredentials basicCreds = new BasicAWSCredentials(accessKey, secretKey);
+          SessionAWSCredentials basicCreds = new SessionAWSCredentials(accessKey, secretKey, sessionToken);
 
           AmazonTranscribeStreamingClient client = new AmazonTranscribeStreamingClient(region, config, basicCreds);
           client.TranscriptEvent += TranscriptEvent;

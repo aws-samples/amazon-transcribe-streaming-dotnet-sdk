@@ -62,11 +62,19 @@ namespace Amazon.TranscribeStreamingService {
                 {"X-Amz-Credential", credentials},
                 {"X-Amz-Date", dateTimeString},
                 {"X-Amz-Expires", "30"},
-                {"X-Amz-SignedHeaders", "host"}
             };
+
+            // Check the type of the _credentials object and cast it to the appropriate type
+            if (!string.IsNullOrEmpty(_credentials.GetCredentials().Token))
+            {
+                result.Add("X-Amz-Security-Token", _credentials.GetCredentials().Token);
+            }
+            result.Add("X-Amz-SignedHeaders", "host");
+            
             result.Update(_config.GetDictionary());
             return string.Join("&", result.Select(x => $"{x.Key}={Uri.EscapeDataString(x.Value)}"));
         }
+
         private string GetSignature(string host, string dateString, string dateTimeString, string credentialScope)
         {
             var canonicalRequest = CanonicalizeRequest(Path, host, dateTimeString, credentialScope);
