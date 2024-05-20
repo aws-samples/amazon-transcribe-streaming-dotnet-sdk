@@ -28,6 +28,7 @@ namespace Amazon.TranscribeStreamingService.Models {
         public Config(string mediaEncoding, string sampleRate) {
             this.MediaEncoding = mediaEncoding;
             this.SampleRate = sampleRate;
+            this.IdentifyLanguage = "true";
         }
 
         public Config(string mediaEncoding, string sampleRate, string language) {
