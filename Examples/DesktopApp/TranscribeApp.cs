@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,7 +35,6 @@ namespace Amazon.TranscribeStreamingService.Example
         // Text variables for holding transcriptions
         private static string TranscribedText = "";
         private static string result = "";
-        private static string currenttext = "";
 
         // Amazon Transcribe Streaming Client
         private static AmazonTranscribeStreamingClient client;
@@ -109,9 +109,10 @@ namespace Amazon.TranscribeStreamingService.Example
         }
 
         // Method to update the rich text box with the current transcription text
-        void updateGUI()
+        void updateGUI(string txt)
         {
-            rtbTranscription.Text = currenttext;
+            rtbTranscription.Text = txt;
+;
             rtbTranscription.SelectionStart = rtbTranscription.TextLength;
             rtbTranscription.SelectionLength = 0;
             rtbTranscription.ScrollToCaret();
@@ -130,29 +131,31 @@ namespace Amazon.TranscribeStreamingService.Example
                 {
 
                     TranscribedText += result + "\n";
-                    currenttext = TranscribedText;
+
 
                     //Debug.WriteLine(TranscribedText);
 
-                    if (InvokeRequired)
-                    {
-                       Invoke(new MethodInvoker(updateGUI));
-                    } else
-                    {
-                       updateGUI();
-                    }
+                    //if (InvokeRequired)
+                    //{
+                    //   Invoke(new MethodInvoker(() => updateGUI(TranscribedText)));
+                    //} else
+                    //{
+                    //   updateGUI(TranscribedText);
+                    //}
                 }
                 else
                 {
-                    currenttext = TranscribedText + "\n" + result;
-                    //if (InvokeRequired)
-                    //{
-                    //   Invoke(new MethodInvoker(updateGUI));
-                    //}
-                    //else
-                    //{
-                    //    updateGUI();
-                    //}
+                    //string currenttext = TranscribedText + "\n" + result;
+                    
+                    
+                    if (InvokeRequired)
+                    {
+                        Invoke(new MethodInvoker(() => updateGUI(result)));
+                    }
+                    else
+                    {
+                        updateGUI(result);
+                    }
 
                     Debug.WriteLine("+");
                     return;
@@ -196,6 +199,7 @@ namespace Amazon.TranscribeStreamingService.Example
             config.EnableChannelIdentification = "true";
             config.NumberOfChannels = "2";
             config.EnablePartialResultsStabilization = "true";
+            
             client = new AmazonTranscribeStreamingClient(region, config, null);
 
             client.TranscriptEvent += TranscriptEvent;
