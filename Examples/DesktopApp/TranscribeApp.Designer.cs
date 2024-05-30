@@ -129,7 +129,6 @@
             label2.Size = new Size(108, 15);
             label2.TabIndex = 8;
             label2.Text = "Speakers Language";
-            
             // 
             // TranscribeApp
             // 

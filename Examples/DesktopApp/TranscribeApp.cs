@@ -109,7 +109,7 @@ namespace Amazon.TranscribeStreamingService.Example
             try
             {
                 var languages = await GetSupportedLanguagesAsync();
-                
+
                 cbxLanguages.DataSource = new BindingSource(languages, null);
                 cbxLanguages.DisplayMember = "Value";
                 cbxLanguages.ValueMember = "Key";
@@ -201,7 +201,7 @@ namespace Amazon.TranscribeStreamingService.Example
                     return;
                 }
             }
-            
+
             //Console.WriteLine("TEST: " + result);
         }
 
@@ -216,7 +216,7 @@ namespace Amazon.TranscribeStreamingService.Example
                 var starttime = transcriptEvent.Transcript.Results.FirstOrDefault().StartTime;
                 var alternatives = transcriptEvent.Transcript?.Results?.FirstOrDefault().Alternatives.Count;
 
-                Debug.WriteLine(result.Length.ToString() + " - " + ispartial.ToString() + " - " + starttime.ToString() + " - " + alternatives.ToString()+ " - " + result);
+                Debug.WriteLine(result.Length.ToString() + " - " + ispartial.ToString() + " - " + starttime.ToString() + " - " + alternatives.ToString() + " - " + result);
                 if (ispartial == "False")
                 {
 
@@ -280,7 +280,7 @@ namespace Amazon.TranscribeStreamingService.Example
                 await speakersClient.StopStreaming();
                 btnRecordSpeakers.Text = "Start Speakers Transcription";
                 cbxSpkrLanguages.Enabled = true;
-                
+
                 return;
 
             }
@@ -297,6 +297,8 @@ namespace Amazon.TranscribeStreamingService.Example
             var region = "us-east-1";
 
             Config config = new Config("pcm", sampleRate.ToString(), _speakersLanguageCode);
+            //config.Language = null;
+            //config.IdentifyMultipleLanguages = "true";
             config.EnableChannelIdentification = "true";
             config.NumberOfChannels = "2";
             config.EnablePartialResultsStabilization = "true";
@@ -306,7 +308,7 @@ namespace Amazon.TranscribeStreamingService.Example
             speakersClient.TranscriptEvent += TranscriptSpeakersEvent;
             speakersClient.TranscriptException += TranscribeException;
 
-            btnRecordSpeakers.Text = "Stop Transcription";
+            btnRecordSpeakers.Text = "Stop Speakers Transcription";
             cbxSpkrLanguages.Enabled = false;
             await speakersClient.StartStreaming();
 
@@ -336,13 +338,13 @@ namespace Amazon.TranscribeStreamingService.Example
         private async Task btnRecordMike_Click()
         {
 
-            if (btnRecordMike.Text == "Stop Transcription")
+            if (btnRecordMike.Text == "Stop Mike Transcription")
             {
 
                 // Stop the recording and streaming
                 _microphoneCapture.StopRecording();
                 await clientMic.StopStreaming();
-                btnRecordMike.Text = "Start Transcription";
+                btnRecordMike.Text = "Start Mike Transcription";
                 cbxLanguages.Enabled = true;
                 return;
 
@@ -360,7 +362,7 @@ namespace Amazon.TranscribeStreamingService.Example
             clientMic.TranscriptEvent += TranscriptEventMike;
             clientMic.TranscriptException += TranscribeException;
 
-            btnRecordMike.Text = "Stop Transcription";
+            btnRecordMike.Text = "Stop Mike Transcription";
             cbxLanguages.Enabled = false;
             await clientMic.StartStreaming();
 
@@ -405,9 +407,6 @@ namespace Amazon.TranscribeStreamingService.Example
             _speakersLanguageCode = cbxSpkrLanguages.SelectedValue.ToString();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
     }
 }
