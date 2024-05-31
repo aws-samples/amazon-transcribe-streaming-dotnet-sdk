@@ -34,6 +34,8 @@ namespace Amazon.TranscribeStreamingService.Example
         private MixingWaveProvider32 _mixer;
 
         private MemoryStream? _memoryStream;
+        private MemoryStream? _SpeakerMemoryStream;
+
         private Task? _sendAudioTask;
         private Task? _receiveTranscriptionTask;
 
@@ -287,7 +289,7 @@ namespace Amazon.TranscribeStreamingService.Example
 
             _loopbackCapture = new WasapiLoopbackCapture
             {
-                WaveFormat = new WaveFormat(16000, 16, 2)
+                WaveFormat = new WaveFormat(32000, 16, 2)
             };
 
             var waveFormat = _loopbackCapture.WaveFormat;
@@ -299,6 +301,7 @@ namespace Amazon.TranscribeStreamingService.Example
             Config config = new Config("pcm", sampleRate.ToString(), _speakersLanguageCode);
             //config.Language = null;
             //config.IdentifyMultipleLanguages = "true";
+            //config.LanguageOptions = "en-US,ja-JP";
             config.EnableChannelIdentification = "true";
             config.NumberOfChannels = "2";
             config.EnablePartialResultsStabilization = "true";
@@ -315,18 +318,18 @@ namespace Amazon.TranscribeStreamingService.Example
             int chunkSizeTime = 100; // 100 millisecond chunks
             int chunkSize = 8000 * 2 / (1000 / chunkSizeTime); // calculate the chunk size
 
-            _memoryStream = new MemoryStream();
+            _SpeakerMemoryStream = new MemoryStream();
 
-            _loopbackCapture.DataAvailable += (s, a) => _memoryStream.Write(a.Buffer, 0, a.BytesRecorded);
+            _loopbackCapture.DataAvailable += (s, a) => _SpeakerMemoryStream.Write(a.Buffer, 0, a.BytesRecorded);
 
-            _loopbackCapture.RecordingStopped += (s, a) => _memoryStream.Close();
+            _loopbackCapture.RecordingStopped += (s, a) => _SpeakerMemoryStream.Close();
 
             _loopbackCapture.StartRecording();
 
             _loopbackCapture.DataAvailable += async (s, a) =>
             {
                 speakersClient.StreamBuffer(a.Buffer);
-                await _memoryStream.FlushAsync();
+                await _SpeakerMemoryStream.FlushAsync();
             };
 
 
