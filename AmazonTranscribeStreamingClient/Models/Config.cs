@@ -1,6 +1,8 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0
 
+using System.Security.Principal;
+
 namespace Amazon.TranscribeStreamingService.Models {
     public class Config {
         public string? Language;
@@ -20,6 +22,7 @@ namespace Amazon.TranscribeStreamingService.Models {
         public string? PiiEntityTypes { get; set; }
         public string? LanguageModelName { get; set; }
         public string? IdentifyLanguage { get; set; }
+        public string? IdentifyMultipleLanguages { get; set; }
         public string? LanguageOptions { get; set; }
         public string? PreferredLanguage { get; set; }
         public string? VocabularyNames { get; set; }
@@ -55,7 +58,8 @@ namespace Amazon.TranscribeStreamingService.Models {
             if(!string.IsNullOrEmpty(this.PiiEntityTypes)) dict.Add("pii-entity-types", this.PiiEntityTypes);
             if(!string.IsNullOrEmpty(this.LanguageModelName)) dict.Add("language-model-name", this.LanguageModelName);
             if(!string.IsNullOrEmpty(this.IdentifyLanguage)) dict.Add("identify-language", this.IdentifyLanguage);
-            if(!string.IsNullOrEmpty(this.LanguageOptions)) dict.Add("language-options", this.LanguageOptions);
+            if (!string.IsNullOrEmpty(this.IdentifyMultipleLanguages)) dict.Add("identify-multiple-languages", this.IdentifyMultipleLanguages);
+            if (!string.IsNullOrEmpty(this.LanguageOptions)) dict.Add("language-options", this.LanguageOptions);
             if(!string.IsNullOrEmpty(this.PreferredLanguage)) dict.Add("preferred-language", this.PreferredLanguage);
             if(!string.IsNullOrEmpty(this.VocabularyNames)) dict.Add("vocabulary-names", this.VocabularyNames);
             if(!string.IsNullOrEmpty(this.VocabularyFilterNames)) dict.Add("vocabulary-filter-names", this.VocabularyFilterNames);
