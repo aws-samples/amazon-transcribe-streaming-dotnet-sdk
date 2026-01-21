@@ -51,8 +51,9 @@ namespace Amazon.TranscribeStreamingService
     /// <summary>
     /// This opens a new websocket session and returns once it is connected.
     /// </summary>
+    /// <param name="configEvent">Optional configuration event to send after connection</param>
     /// <returns>Nothing.</returns>
-    public async Task StartStreaming()
+    public async Task StartStreaming(Models.ConfigurationEvent? configEvent = null)
     {
       TranscribePresignedUrl presigned = new TranscribePresignedUrl(this._region, this._config, this._credentials);
       string webSocketUrl = presigned.GetPresignedUrl();
@@ -81,6 +82,14 @@ namespace Amazon.TranscribeStreamingService
         }
       });
       await _client.Start();
+
+      // Send ConfigurationEvent if provided
+      if (configEvent != null)
+      {
+        ConfigurationEventMessage configMessage = new ConfigurationEventMessage(configEvent);
+        byte[] buffer = configMessage.Serialize();
+        _client.Send(buffer);
+      }
     }
 
     /// <summary>
